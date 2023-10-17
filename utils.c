@@ -84,3 +84,91 @@ long int cast_unsigned_to_size(unsigned long int num, int size)
 
 	return ((unsigned int)num);
 }
+
+
+int is_printable(char c) {
+    return (c >= 32 && c <= 126);
+}
+
+void append_hexa_code(char* str, char c) {
+    sprintf(str, "%02X", c);
+}
+
+int convert_size_number(int num) {
+    return num;
+}
+
+void print_char(char c) {
+    putchar(c);
+}
+
+void print_string(char *s) {
+    if(s != NULL) {
+        printf("%s", s);
+    }
+}
+
+void print_percent() {
+    printf("%%");
+}
+
+void print_int(int i) {
+    printf("%d", i);
+}
+
+void print_binary(int num) {
+    for (int i = 31; i >= 0; i--) {
+        putchar((num & (1 << i)) ? '1' : '0');
+    }
+}
+
+void print_unsigned(unsigned int num) {
+    printf("%u", num);
+}
+
+void print_octal(int num) {
+    printf("%o", num);
+}
+
+void print_hexadecimal(int num) {
+    printf("%x", num);
+}
+
+void print_hexa_upper(int num) {
+    printf("%X", num);
+}
+
+void print_pointer(void *p) {
+    printf("%p", p);
+}
+
+void print_non_printable(char *s) {
+    while (*s) {
+        if (is_printable(*s)) {
+            putchar(*s);
+        } else {
+            printf("\\x%02X", *s);
+        }
+        s++;
+    }
+}
+
+void print_reverse(char *s) {
+    int len = strlen(s);
+    for (int i = len - 1; i >= 0; i--) {
+        putchar(s[i]);
+    }
+}
+
+void print_rot13string(char *s) {
+    while (*s) {
+        if ((*s >= 'A' && *s <= 'M') || (*s >= 'a' && *s <= 'm')) {
+            putchar(*s + 13);
+        } else if ((*s >= 'N' && *s <= 'Z') || (*s >= 'n' && *s <= 'z')) {
+            putchar(*s - 13);
+        } else {
+            putchar(*s);
+        }
+        s++;
+    }
+}

@@ -2,6 +2,12 @@
 #include <stdio.h>
 #include "main.h"
 
+int is_digit(char c) {
+    return c >= '0' && c <= '9';
+}
+
+long int convert_size_number(long int num, int size);
+long int convert_size_unsgnd(long int num, int size);
 /**
  * main - Entry point
  *
@@ -38,7 +44,7 @@ int main(void)
     len2 = printf("Percent:[%%]\n");
     _printf("Len:[%d]\n", len);
     printf("Len:[%d]\n", len2);
-    _printf("Unknown:[%r]\n");
-    printf("Unknown:[%r]\n");
+    _printf("Unknown:[%d]\n");
+    printf("Unknown:[%d]\n");
     return (0);
 }

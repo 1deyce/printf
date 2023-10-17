@@ -5,7 +5,7 @@
 #include <unistd.h>
 
 #define UNUSED(x) (void)(x)
-#define BUFFER_CAPACITY 1024
+#define BUFF_SIZE 1024
 
 /* FLAGS */
 #define F_MINUS 1
@@ -109,8 +109,7 @@ char buffer[],
 int is_printable(char);
 int append_hexa_code(char, char[], int);
 int is_digit(char);
-
 long int convert_size_number(long int num, int size);
-long int convert_size_unsgnd(unsigned long int num, int size);
+long int convert_size_unsgnd(long int num, int size);
 
 #endif /* MAIN_H */
