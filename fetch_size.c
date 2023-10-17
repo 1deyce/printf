@@ -1,26 +1,26 @@
 #include "main.h"
 
 /**
- * fetch_size - Determines the size to cast the argument
+ * fetch_size - Calculates the size to cast the argument
  * @format: Formatted string in which to print the arguments
- * @index: pointer to index in format
+ * @i: List of arguments to be printed.
  *
- * Return: Size.
+ * Return: Precision.
  */
-int fetch_size(const char *format, int *index)
+int fetch_size(const char *format, int *i)
 {
-	int current_index = *index + 1;
+	int curr_i = *i + 1;
 	int size = 0;
 
-	if (format[current_index] == 'l')
+	if (format[curr_i] == 'l')
 		size = S_LONG;
-	else if (format[current_index] == 'h')
+	else if (format[curr_i] == 'h')
 		size = S_SHORT;
 
 	if (size == 0)
-		*index = current_index - 1;
+		*i = curr_i - 1;
 	else
-		*index = current_index;
+		*i = curr_i;
 
 	return (size);
 }
