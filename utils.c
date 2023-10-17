@@ -85,90 +85,136 @@ long int cast_unsigned_to_size(unsigned long int num, int size)
 	return ((unsigned int)num);
 }
 
+int print_char(va_list types, char buffer[], int flags, int width, int precision, int size) {
+    UNUSED(flags);
+    UNUSED(width);
+    UNUSED(precision);
+    UNUSED(size);
+    char c = (char)va_arg(types, int);
+    buffer[0] = c;
+    return 1;
+}
+
+int print_string(va_list types, char buffer[], int flags, int width, int precision, int size) {
+    UNUSED(flags);
+    UNUSED(width);
+    UNUSED(precision);
+    UNUSED(size);
+    char *str = va_arg(types, char*);
+    int i = 0;
+    while(str[i] != '\0' && i < BUFFER_CAPACITY - 1) {
+        buffer[i] = str[i];
+        i++;
+    }
+    buffer[i] = '\0';
+    return i;
+}
+
+int print_percent(va_list types, char buffer[], int flags, int width, int precision, int size) {
+    UNUSED(types);
+    UNUSED(flags);
+    UNUSED(width);
+    UNUSED(precision);
+    UNUSED(size);
+    buffer[0] = '%';
+    return 1;
+}
+
+int print_int(va_list types, char buffer[], int flags, int width, int precision, int size) {
+    UNUSED(flags);
+    UNUSED(width);
+    UNUSED(precision);
+    UNUSED(size);
+    int num = va_arg(types, int);
+    return sprintf(buffer, "%d", num);
+}
+
+int print_binary(va_list types, char buffer[], int flags, int width, int precision, int size) {
+    UNUSED(flags);
+    UNUSED(width);
+    UNUSED(precision);
+    UNUSED(size);
+    int num = va_arg(types, int);
+    int i, count = 0;
+    for (i = sizeof(num) * 8 - 1; i >= 0; i--) {
+        buffer[count++] = (num & (1 << i)) ? '1' : '0';
+    }
+    return count;
+}
+
+int print_unsigned(va_list types, char buffer[], int flags, int width, int precision, int size) {
+    UNUSED(flags);
+    UNUSED(width);
+    UNUSED(precision);
+    UNUSED(size);
+    unsigned int num = va_arg(types, unsigned int);
+    return sprintf(buffer, "%u", num);
+}
+
+int print_octal(va_list types, char buffer[], int flags, int width, int precision, int size) {
+    UNUSED(flags);
+    UNUSED(width);
+    UNUSED(precision);
+    UNUSED(size);
+    unsigned int num = va_arg(types, unsigned int);
+    return sprintf(buffer, "%o", num);
+}
+
+int print_hexadecimal(va_list types, char buffer[], int flags, int width, int precision, int size) {
+    UNUSED(flags);
+    UNUSED(width);
+    UNUSED(precision);
+    UNUSED(size);
+    unsigned int num = va_arg(types, unsigned int);
+    return sprintf(buffer, "%x", num);
+}
+
+int print_hexa_upper(va_list types, char buffer[], int flags, int width, int precision, int size) {
+    UNUSED(flags);
+    UNUSED(width);
+    UNUSED(precision);
+    UNUSED(size);
+    unsigned int num = va_arg(types, unsigned int);
+    return sprintf(buffer, "%X", num);
+}
+
+int print_non_printable(va_list types, char buffer[], int flags, int width, int precision, int size) {
+    return 0;
+}
+
+int print_pointer(va_list types, char buffer[], int flags, int width, int precision, int size) {
+    UNUSED(flags);
+    UNUSED(width);
+    UNUSED(precision);
+    UNUSED(size);
+    void *ptr = va_arg(types, void*);
+    return sprintf(buffer, "%p", ptr);
+}
+
+int print_reverse(va_list types, char buffer[], int flags, int width, int precision, int size) {
+    return 0;
+}
+
+int print_rot13string(va_list types, char buffer[], int flags, int width, int precision, int size) {
+    return 0;
+}
 
 int is_printable(char c) {
     return (c >= 32 && c <= 126);
 }
 
-void append_hexa_code(char* str, char c) {
-    sprintf(str, "%02X", c);
+int append_hexa_code(char c, char buffer[], int index) {
+    return sprintf(buffer + index, "\\x%02X", c);
 }
 
-int convert_size_number(int num) {
+int is_digit(char c) {
+    return (c >= '0' && c <= '9');
+}
+
+long int convert_size_number(long int num, int size) {
     return num;
 }
 
-void print_char(char c) {
-    putchar(c);
-}
-
-void print_string(char *s) {
-    if(s != NULL) {
-        printf("%s", s);
-    }
-}
-
-void print_percent() {
-    printf("%%");
-}
-
-void print_int(int i) {
-    printf("%d", i);
-}
-
-void print_binary(int num) {
-    for (int i = 31; i >= 0; i--) {
-        putchar((num & (1 << i)) ? '1' : '0');
-    }
-}
-
-void print_unsigned(unsigned int num) {
-    printf("%u", num);
-}
-
-void print_octal(int num) {
-    printf("%o", num);
-}
-
-void print_hexadecimal(int num) {
-    printf("%x", num);
-}
-
-void print_hexa_upper(int num) {
-    printf("%X", num);
-}
-
-void print_pointer(void *p) {
-    printf("%p", p);
-}
-
-void print_non_printable(char *s) {
-    while (*s) {
-        if (is_printable(*s)) {
-            putchar(*s);
-        } else {
-            printf("\\x%02X", *s);
-        }
-        s++;
-    }
-}
-
-void print_reverse(char *s) {
-    int len = strlen(s);
-    for (int i = len - 1; i >= 0; i--) {
-        putchar(s[i]);
-    }
-}
-
-void print_rot13string(char *s) {
-    while (*s) {
-        if ((*s >= 'A' && *s <= 'M') || (*s >= 'a' && *s <= 'm')) {
-            putchar(*s + 13);
-        } else if ((*s >= 'N' && *s <= 'Z') || (*s >= 'n' && *s <= 'z')) {
-            putchar(*s - 13);
-        } else {
-            putchar(*s);
-        }
-        s++;
-    }
+long int convert_size_unsgnd(unsigned long int num, int size) {
+    return num;
 }
