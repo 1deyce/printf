@@ -9,7 +9,9 @@ $ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c
 - As a consequence, be careful not to push any c file containing a main function in the root directory of your project (you could have a test folder containing all your tests files including main functions)
 - Our main files will include your main header file (main.h): #include main.h
 
-Group Project done by myself due to unforseen circumstances.                                                                    
+Group Project done by myself due to unforseen circumstances.
+
+## Tasks:
                                                                                     
 0. Write a function that produces output according to a format. 
     Prototype: int _printf(const char *format, ...);
