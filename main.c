@@ -6,8 +6,6 @@ int is_digit(char c) {
     return c >= '0' && c <= '9';
 }
 
-long int convert_size_number(long int num, int size);
-long int convert_size_unsgnd(long int num, int size);
 /**
  * main - Entry point
  *
