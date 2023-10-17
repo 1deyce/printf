@@ -12,7 +12,7 @@ int _printf(const char *format, ...)
 	int index, printed = 0, total_printed_chars = 0;
 	int flags, width, precision, size, content_index = 0;
 	va_list args;
-	char content[BUFFER_CAPACITY];
+	char content[BUFF_SIZE];
 
 	if (format == NULL)
 		return (-1);
@@ -24,7 +24,7 @@ int _printf(const char *format, ...)
 		if (format[index] != '%')
 		{
 			content[content_index++] = format[index];
-			if (content_index == BUFFER_CAPACITY)
+			if (content_index == BUFF_SIZE)
 				show_buffer_content(content, &content_index);
 
 			total_printed_chars++;
