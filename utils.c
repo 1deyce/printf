@@ -85,7 +85,7 @@ long int cast_unsigned_to_size(unsigned long int num, int size)
 	return ((unsigned int)num);
 }
 
-int print_char(va_list types, char buffer[], int flags, int width, int precision, int size) {
+int print_char() {
     UNUSED(flags);
     UNUSED(width);
     UNUSED(precision);
@@ -95,14 +95,14 @@ int print_char(va_list types, char buffer[], int flags, int width, int precision
     return 1;
 }
 
-int print_string(va_list types, char buffer[], int flags, int width, int precision, int size) {
+int print_string() {
     UNUSED(flags);
     UNUSED(width);
     UNUSED(precision);
     UNUSED(size);
     char *str = va_arg(types, char*);
     int i = 0;
-    while(str[i] != '\0' && i < BUFFER_CAPACITY - 1) {
+    while(str[i] != '\0' && i < BUFFER_SIZE - 1) {
         buffer[i] = str[i];
         i++;
     }
@@ -110,7 +110,7 @@ int print_string(va_list types, char buffer[], int flags, int width, int precisi
     return i;
 }
 
-int print_percent(va_list types, char buffer[], int flags, int width, int precision, int size) {
+int print_percent() {
     UNUSED(types);
     UNUSED(flags);
     UNUSED(width);
@@ -120,7 +120,7 @@ int print_percent(va_list types, char buffer[], int flags, int width, int precis
     return 1;
 }
 
-int print_int(va_list types, char buffer[], int flags, int width, int precision, int size) {
+int print_int() {
     UNUSED(flags);
     UNUSED(width);
     UNUSED(precision);
@@ -129,7 +129,7 @@ int print_int(va_list types, char buffer[], int flags, int width, int precision,
     return sprintf(buffer, "%d", num);
 }
 
-int print_binary(va_list types, char buffer[], int flags, int width, int precision, int size) {
+int print_binary() {
     UNUSED(flags);
     UNUSED(width);
     UNUSED(precision);
@@ -142,7 +142,7 @@ int print_binary(va_list types, char buffer[], int flags, int width, int precisi
     return count;
 }
 
-int print_unsigned(va_list types, char buffer[], int flags, int width, int precision, int size) {
+int print_unsigned() {
     UNUSED(flags);
     UNUSED(width);
     UNUSED(precision);
@@ -151,7 +151,7 @@ int print_unsigned(va_list types, char buffer[], int flags, int width, int preci
     return sprintf(buffer, "%u", num);
 }
 
-int print_octal(va_list types, char buffer[], int flags, int width, int precision, int size) {
+int print_octal() {
     UNUSED(flags);
     UNUSED(width);
     UNUSED(precision);
@@ -160,7 +160,7 @@ int print_octal(va_list types, char buffer[], int flags, int width, int precisio
     return sprintf(buffer, "%o", num);
 }
 
-int print_hexadecimal(va_list types, char buffer[], int flags, int width, int precision, int size) {
+int print_hexadecimal() {
     UNUSED(flags);
     UNUSED(width);
     UNUSED(precision);
@@ -169,7 +169,7 @@ int print_hexadecimal(va_list types, char buffer[], int flags, int width, int pr
     return sprintf(buffer, "%x", num);
 }
 
-int print_hexa_upper(va_list types, char buffer[], int flags, int width, int precision, int size) {
+int print_hexa_upper() {
     UNUSED(flags);
     UNUSED(width);
     UNUSED(precision);
@@ -178,11 +178,11 @@ int print_hexa_upper(va_list types, char buffer[], int flags, int width, int pre
     return sprintf(buffer, "%X", num);
 }
 
-int print_non_printable(va_list types, char buffer[], int flags, int width, int precision, int size) {
+int print_non_printable() {
     return 0;
 }
 
-int print_pointer(va_list types, char buffer[], int flags, int width, int precision, int size) {
+int print_pointer() {
     UNUSED(flags);
     UNUSED(width);
     UNUSED(precision);
@@ -191,11 +191,11 @@ int print_pointer(va_list types, char buffer[], int flags, int width, int precis
     return sprintf(buffer, "%p", ptr);
 }
 
-int print_reverse(va_list types, char buffer[], int flags, int width, int precision, int size) {
+int print_reverse() {
     return 0;
 }
 
-int print_rot13string(va_list types, char buffer[], int flags, int width, int precision, int size) {
+int print_rot13string() {
     return 0;
 }
 
